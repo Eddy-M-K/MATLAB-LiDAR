@@ -6,6 +6,7 @@ format long
 
 % -------------------------------------------------------------------------
 %wassup lol
+% yo
     % RPM must be in increments of 60 from 300 to 1200
     RPM = 1200; 
 
