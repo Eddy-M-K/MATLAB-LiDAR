@@ -15,8 +15,8 @@ format long
     
     % LiDAR Sensor Location Shift
     LiDAR_x = 0;
-    LiDAR_y = 0;
-    LiDAR_z = 0;
+    LiDAR_y = 0.5;
+    LiDAR_z = 0.5;
     
     Azimuth_Resolution = RPM / 60 * 360 * 55.296*10^-6;
     Radius_Start = 0.04191;
@@ -36,9 +36,9 @@ format long
 % -------------------------------------------------------------------------
 
     % Shift sphere's center:
-    sphere_shift_x = 0.5;
-    sphere_shift_y = -0.5;
-    sphere_shift_z = 0.1;
+    sphere_shift_x = 0.05;
+    sphere_shift_y = -0.05;
+    sphere_shift_z = 0.01;
 
     % Function Calls
     Golf_Ball_Intersection(sphere_shift_x, sphere_shift_y, sphere_shift_z, r, Azimuth_Resolution, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
@@ -119,7 +119,6 @@ function Moving_Golf_Ball_Intersection(sphere_moving_x, sphere_moving_y, sphere_
                 s = -B/2*A;
                 SPOI = [(P_Start(1) + s*(slope(1))),(P_Start(2) + s*(slope(2))),(P_Start(3) + s*(slope(3)))]
                 plot3([P_Start(1) SPOI(1)], [P_Start(2) SPOI(2)], [P_Start(3) SPOI(3)]);
-                plot3([P_Start(1) P_End(1)], [P_Start(2) P_End(2)], [P_Start(3) P_End(3)], 'Color', 'Black');
             elseif (Delta > 0)
                 syms d;
                 s = solve((P_Start(1) + d*(slope(1)) + sphere_moving_x(position))^2 + (P_Start(2) + d*(slope(2)) + sphere_moving_y(position))^2+(P_Start(3) + d*(slope(3)) + sphere_moving_z(position))^2 == r^2, d);
