@@ -40,6 +40,7 @@ format long
     sphere_shift_z = 0.1;
 
     % Function Calls
+
 %     Golf_Ball_Intersection(sphere_shift_x, sphere_shift_y, sphere_shift_z, r, Azimuth_Resolution, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
 
 % -------------------------------------------------------------------------
