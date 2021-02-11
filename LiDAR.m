@@ -21,7 +21,9 @@ format long
     
     Azimuth_Resolution = RPM / 60 * 360 * 55.296*10^-6;
     Radius_Start = 0.04191;
-    Radius_End = 0.04267 * sind((180-Azimuth_Resolution) / 2) / sind(Azimuth_Resolution);
+%     Radius_End = 0.04267 * sind((180-Azimuth_Resolution) / 2) / sind(Azimuth_Resolution);
+    Radius_End = 10;
+
 
 % -------------------------------------------------------------------------
 
@@ -82,6 +84,26 @@ format long
 %     sphere_moving_x2 = sphere_moving_position2(:,1);
 %     sphere_moving_y2 = sphere_moving_position2(:,3);
 %     sphere_moving_z2 = sphere_moving_position2(:,2);
+
+% ------------------------------------------------------------------------- 
+    
+%     Golf_Ball_Trajectory(sphere_moving_x1, sphere_moving_y1, sphere_moving_z1, r)
+
+    hold off
+    figure 
+    hold on
+    
+    sphere_moving_position1 = readmatrix('LiDAR.xlsx');
+    sphere_moving_x1 = sphere_moving_position1(:,1);
+    sphere_moving_y1 = sphere_moving_position1(:,3);
+    sphere_moving_z1 = sphere_moving_position1(:,2);   
+    
+%     Laser_Emission_Pattern(FOV_Start, FOV_End, Lower_Angle, Upper_Angle, 10, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
+    
+    sphere_moving_position2 = readmatrix('LiDAR_Precise.xlsx');
+    sphere_moving_x2 = sphere_moving_position2(:,1);
+    sphere_moving_y2 = sphere_moving_position2(:,3);
+    sphere_moving_z2 = sphere_moving_position2(:,2);
 
 %     hold off
 %     figure
