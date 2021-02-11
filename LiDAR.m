@@ -14,8 +14,8 @@ format long
     
     % LiDAR Sensor Location Shift
 
-    LiDAR_x = 1.0;
-    LiDAR_y = 1.0;
+    LiDAR_x = 0;
+    LiDAR_y = 0;
     LiDAR_z = 0;
 
     
@@ -37,14 +37,14 @@ format long
 % -------------------------------------------------------------------------
 
     % Shift sphere's center:
-    sphere_shift_x = 0.5;
-    sphere_shift_y = -0.5;
-    sphere_shift_z = 0.1;
+    sphere_shift_x = 0.25;
+    sphere_shift_y = 0;
+    sphere_shift_z = 0;
 
     % Function Calls
 
 
-%     Golf_Ball_Intersection(sphere_shift_x, sphere_shift_y, sphere_shift_z, r, Azimuth_Resolution, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
+    Golf_Ball_Intersection(sphere_shift_x, sphere_shift_y, sphere_shift_z, r, Azimuth_Resolution, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
 
 
 % -------------------------------------------------------------------------
@@ -59,35 +59,35 @@ format long
 
 % -------------------------------------------------------------------------
 
-    sphere_moving_position1 = readmatrix('LiDAR.xlsx');
-    sphere_moving_x1 = sphere_moving_position1(:,1);
-    sphere_moving_y1 = sphere_moving_position1(:,3);
-    sphere_moving_z1 = sphere_moving_position1(:,2);   
-    
-    Golf_Ball_Trajectory(sphere_moving_x1, sphere_moving_y1, sphere_moving_z1, r)
-
-    hold off
-    figure 
-    hold on
-    
-    sphere_moving_position1 = readmatrix('LiDAR.xlsx');
-    sphere_moving_x1 = sphere_moving_position1(:,1);
-    sphere_moving_y1 = sphere_moving_position1(:,3);
-    sphere_moving_z1 = sphere_moving_position1(:,2);   
-    
-    Golf_Ball_Trajectory(sphere_moving_x1, sphere_moving_y1, sphere_moving_z1, r)
-    Laser_Emission_Pattern(FOV_Start, FOV_End, Lower_Angle, Upper_Angle, 10, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
-    
-    sphere_moving_position2 = readmatrix('LiDAR_Precise.xlsx');
-    sphere_moving_x2 = sphere_moving_position2(:,1);
-    sphere_moving_y2 = sphere_moving_position2(:,3);
-    sphere_moving_z2 = sphere_moving_position2(:,2);
+%     sphere_moving_position1 = readmatrix('LiDAR.xlsx');
+%     sphere_moving_x1 = sphere_moving_position1(:,1);
+%     sphere_moving_y1 = sphere_moving_position1(:,3);
+%     sphere_moving_z1 = sphere_moving_position1(:,2);   
+%     
+%     Golf_Ball_Trajectory(sphere_moving_x1, sphere_moving_y1, sphere_moving_z1, r)
+% 
+%     hold off
+%     figure 
+%     hold on
+%     
+%     sphere_moving_position1 = readmatrix('LiDAR.xlsx');
+%     sphere_moving_x1 = sphere_moving_position1(:,1);
+%     sphere_moving_y1 = sphere_moving_position1(:,3);
+%     sphere_moving_z1 = sphere_moving_position1(:,2);   
+%     
+%     Golf_Ball_Trajectory(sphere_moving_x1, sphere_moving_y1, sphere_moving_z1, r)
+%     Laser_Emission_Pattern(FOV_Start, FOV_End, Lower_Angle, Upper_Angle, 10, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
+%     
+%     sphere_moving_position2 = readmatrix('LiDAR_Precise.xlsx');
+%     sphere_moving_x2 = sphere_moving_position2(:,1);
+%     sphere_moving_y2 = sphere_moving_position2(:,3);
+%     sphere_moving_z2 = sphere_moving_position2(:,2);
 
 %     hold off
 %     figure
 %     hold on
 
-    Moving_Golf_Ball_Intersection(sphere_moving_x2, sphere_moving_y2, sphere_moving_z2, r, Azimuth_Resolution, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
+%     Moving_Golf_Ball_Intersection(sphere_moving_x2, sphere_moving_y2, sphere_moving_z2, r, Azimuth_Resolution, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
 
 % -------------------------------------------------------------------------
 
@@ -270,9 +270,9 @@ function Golf_Ball_Intersection(sphere_shift_x, sphere_shift_y, sphere_shift_z, 
                 p1 = [(P_Start(1) + s(1)*slope(1)), (P_Start(2) + s(1)*slope(2)), (P_Start(3) + s(1)*slope(3))];
                 p2 = [(P_Start(1) + s(2)*slope(1)), (P_Start(2) + s(2)*slope(2)), (P_Start(3) + s(2)*slope(3))];
                 if (norm(p1 - P_Start) < norm(p2 - P_Start))
-                    SPOI = -p1;
+                    SPOI = p1;
                 else
-                    SPOI = -p2;
+                    SPOI = p2;
                 end
 %                 if ((sign(SPOI(1)) ~= sign(P_Start(1))) & (sign(SPOI(2)) ~= sign(P_Start(2))) & (sign(SPOI(3)) ~= sign(P_Start(3))))
 %                     continue
