@@ -16,8 +16,8 @@ format long
     r = 0.021335; 
     
     % LiDAR Sensor Location Shift
-    LiDAR_x = 0;
-    LiDAR_y = 0;
+    LiDAR_x = 1.0;
+    LiDAR_y = 1.0;
     LiDAR_z = 0;
     
     Azimuth_Resolution = RPM / 60 * 360 * 55.296*10^-6;
@@ -43,10 +43,7 @@ format long
     sphere_shift_z = 0.1;
 
     % Function Calls
-     Golf_Ball_Intersection(sphere_shift_x, sphere_shift_y, sphere_shift_z, r, Azimuth_Resolution, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
-
-    Golf_Ball_Intersection(sphere_shift_x, sphere_shift_y, sphere_shift_z, r, Azimuth_Resolution, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
-
+     %Golf_Ball_Intersection(sphere_shift_x, sphere_shift_y, sphere_shift_z, r, Azimuth_Resolution, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
 
 % -------------------------------------------------------------------------
 
@@ -68,14 +65,14 @@ format long
 %     Golf_Ball_Trajectory(sphere_moving_x1, sphere_moving_y1, sphere_moving_z1, r)
 %     Laser_Emission_Pattern(FOV_Start, FOV_End, Lower_Angle, Upper_Angle, 10, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
     
-%     sphere_moving_position2 = readmatrix('LiDAR_Precise.xlsx');
-%     sphere_moving_x2 = sphere_moving_position2(:,1);
-%     sphere_moving_y2 = sphere_moving_position2(:,3);
-%     sphere_moving_z2 = sphere_moving_position2(:,2);
+    sphere_moving_position2 = readmatrix('LiDAR_Precise.xlsx');
+    sphere_moving_x2 = sphere_moving_position2(:,1);
+    sphere_moving_y2 = sphere_moving_position2(:,3);
+    sphere_moving_z2 = sphere_moving_position2(:,2);
 %     hold off
 %     figure
 %     hold on
-%     Moving_Golf_Ball_Intersection(sphere_moving_x2, sphere_moving_y2, sphere_moving_z2, r, Azimuth_Resolution, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
+    Moving_Golf_Ball_Intersection(sphere_moving_x2, sphere_moving_y2, sphere_moving_z2, r, Azimuth_Resolution, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
 
 % -------------------------------------------------------------------------
 
