@@ -17,18 +17,22 @@ r = 0.021335;
 
 % ------------------------
 
+xC = 0.50;
+yC = -0.50;
+zC = 0.1;
+
 [x y z] = sphere;
 x = x * r;
 y = y * r;
 z = z * r;
-surf(x + 0.50, y-0.5, z+0.1);
+surf(x + xC, y + yC, z + zC);
 
 origin = [0, 0, 0];
 
 Azimuth_Resolution = RPM / 60 * 360 * 55.296*10^-6;
 Radius_Start = 0.04191;
 %Radius_End = 0.04267 * sind((180-Azimuth_Resolution) / 2) / sind(Azimuth_Resolution);
-Radius_End = 1;
+Radius_End = 3;
 for Azimuth = 0:Azimuth_Resolution:359
    for Vertical_Angle = -15:2:15
         P_Start = [Radius_Start*sind(Azimuth), ...
@@ -45,9 +49,9 @@ for Azimuth = 0:Azimuth_Resolution:359
         xB = P_End(:,1);
         zB = P_End(:,3);
         yB = P_End(:,2);
-        xC = 0.50;
-        yC = -0.50;
-        zC = 0.1;
+%         xC = 0.50;
+%         yC = -0.50;
+%         zC = 0.1;
         
         A = (xB-xA)^2+(yB-yA)^2+(zB-zA)^2;
         B = 2*((xB-xA)*(xA-xC)+(yB-yA)*(yA-yC)+(zB-zA)*(zA-zC));
@@ -216,6 +220,6 @@ xlim([-5 5]);
 ylim([-5 5]);
 zlim([-0.3 0.3]);
 title('LiDAR Sensor and Triangle Intersection');
-xlabel('Horizontal');
-ylabel('Horizontal');
-zlabel('Vertical');
+xlabel('x');
+ylabel('y');
+zlabel('z');
