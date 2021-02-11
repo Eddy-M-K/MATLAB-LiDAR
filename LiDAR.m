@@ -14,15 +14,15 @@ format long
     
     % LiDAR Sensor Location Shift
 
-    LiDAR_x = 1.0;
-    LiDAR_y = 1.0;
+    LiDAR_x = 0;
+    LiDAR_y = 0;
     LiDAR_z = 0;
 
     
     Azimuth_Resolution = RPM / 60 * 360 * 55.296*10^-6;
     Radius_Start = 0.04191;
 %     Radius_End = 0.04267 * sind((180-Azimuth_Resolution) / 2) / sind(Azimuth_Resolution);
-    Radius_End = 10;
+    Radius_End = 3;
 
 
 % -------------------------------------------------------------------------
@@ -63,14 +63,14 @@ format long
     
 %     Golf_Ball_Trajectory(sphere_moving_x1, sphere_moving_y1, sphere_moving_z1, r)
 
-    hold off
-    figure 
-    hold on
+%     hold off
+%     figure 
+%     hold on
     
-    sphere_moving_position1 = readmatrix('LiDAR.xlsx');
-    sphere_moving_x1 = sphere_moving_position1(:,1);
-    sphere_moving_y1 = sphere_moving_position1(:,3);
-    sphere_moving_z1 = sphere_moving_position1(:,2);   
+%     sphere_moving_position1 = readmatrix('LiDAR.xlsx');
+%     sphere_moving_x1 = sphere_moving_position1(:,1);
+%     sphere_moving_y1 = sphere_moving_position1(:,3);
+%     sphere_moving_z1 = sphere_moving_position1(:,2);   
     
 %     Laser_Emission_Pattern(FOV_Start, FOV_End, Lower_Angle, Upper_Angle, 10, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
     
@@ -294,7 +294,7 @@ function Golf_Ball_Intersection(sphere_shift_x, sphere_shift_y, sphere_shift_z, 
     x = x * r;
     y = y * r;
     z = z * r;
-    surf(x - sphere_shift_x, y - sphere_shift_y, z - sphere_shift_z);
+    surf(x + sphere_shift_x, y + sphere_shift_y, z + sphere_shift_z);
     
     title('LiDAR')
     xlabel('X')
