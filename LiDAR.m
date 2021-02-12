@@ -4,6 +4,7 @@ clearvars
 hold on
 format long
 
+
 % -------------------------------------------------------------------------
 
     % RPM must be in increments of 60 from 300 to 1200
@@ -19,18 +20,30 @@ format long
     LiDAR_z = 0.1;
 
 
-    Azimuth_Resolution = RPM / 60 * 360 * 55.296*10^-6;
-    Radius_Start = 0.04191;
+% RPM must be in increments of 60 from 300 to 1200
+RPM = 1200; 
+
+
+% Golf ball radius
+r = 0.021335; 
+
 
     Radius_End = 0.04267 * sind((180-Azimuth_Resolution) / 2) / sind(Azimuth_Resolution);
 %     Radius_End = 3;
 
+% LiDAR Sensor Location Shift
+LiDAR_x = -0.5;
+LiDAR_y = -0.75;
+LiDAR_z = 0.2;
 
 
-    %Radius_End = 0.04267 * sind((180-Azimuth_Resolution) / 2) / sind(Azimuth_Resolution);
+Azimuth_Resolution = RPM / 60 * 360 * 55.296*10^-6;
+Radius_Start = 0.04191;
+Radius_End = 0.04267 * sind((180-Azimuth_Resolution) / 2) / sind(Azimuth_Resolution);
     
 
 % -------------------------------------------------------------------------
+
 
     % Change triangles' vertices; use values as arguments for additional
     % function calls to Triangle_Intersection
@@ -61,13 +74,24 @@ format long
     % Function Calls
 %     Laser_Emission_Pattern(FOV_Start, FOV_End, Lower_Angle, Upper_Angle, 10, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
 
+% Change triangles' vertices; use values as arguments for additional
+% function calls to Triangle_Intersection
+%     P1 = [1 0 2];
+%     P2 = [0 1 0];
+%     P3 = [2 2 -3];
+% 
+% Function Calls
+% Triangle_Intersection(P1, P2, P3, Azimuth_Resolution, Radius_Start, Radius_End)
+
+
 % -------------------------------------------------------------------------
  
 
-    sphere_moving_position1 = readmatrix('LiDAR.xlsx');
-    sphere_moving_x1 = sphere_moving_position1(:,1);
-    sphere_moving_y1 = sphere_moving_position1(:,3);
-    sphere_moving_z1 = sphere_moving_position1(:,2);   
+% Shift sphere's center:
+% sphere_shift_x = 2;
+% sphere_shift_y = -0.5;
+% sphere_shift_z = 0.1;
+
 
     
 %     Laser_Emission_Pattern(FOV_Start, FOV_End, Lower_Angle, Upper_Angle, 10, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
@@ -84,146 +108,30 @@ format long
 
     Moving_Golf_Ball_Intersection(sphere_moving_x2, sphere_moving_y2, sphere_moving_z2, r, Azimuth_Resolution, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
 
+% Function Calls
+% Golf_Ball_Intersection(sphere_shift_x, sphere_shift_y, sphere_shift_z, r, Azimuth_Resolution, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
+
+
 % -------------------------------------------------------------------------
 
-function Golf_Ball_Trajectory(sphere_moving_x, sphere_moving_y, sphere_moving_z, r)
-    for position = 1:length(sphere_moving_x)
-        [x y z] = sphere;
-        x = x * r;
-        y = y * r;
-        z = z * r;
-        surf(x + sphere_moving_x(position), y + sphere_moving_y(position), z + sphere_moving_z(position));
-    end
-    title('LiDAR')
-    xlabel('X')
-    ylabel('Y')
-    zlabel('Z')
-    daspect([1 1 1])
-end
+FOV_Start = 270;
+FOV_End = 450;
+Lower_Angle = -15;
+Upper_Angle = 15;
 
-function Moving_Golf_Ball_Intersection(sphere_moving_x, sphere_moving_y, sphere_moving_z, r, Azimuth_Resolution, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
-    P_Start = [Radius_Start*sind(0) + LiDAR_x, ...
-        Radius_Start*cosd(0) + LiDAR_y, ...
-        LiDAR_z];
+sphere_moving_position1 = readmatrix('LiDAR.xlsx');
+sphere_moving_x1 = sphere_moving_position1(:,1);
+sphere_moving_y1 = sphere_moving_position1(:,3);
+sphere_moving_z1 = sphere_moving_position1(:,2);   
 
-    P_End = [Radius_End*sind(0)*cosd(0) + LiDAR_x, ...
-        Radius_End*cosd(0)*cosd(0) + LiDAR_y, ...
-        Radius_End*sind(0) + LiDAR_z];
-    
-    plot3([P_Start(1) P_End(1)], [P_Start(2) P_End(2)], [P_Start(3) P_End(3)], 'Color', 'Black');
-    
-    clear P_Start P_End
+LiDAR_Emission_Pattern(FOV_Start, FOV_End, Lower_Angle, Upper_Angle, 10, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
+Golf_Ball_Trajectory(sphere_moving_x1, sphere_moving_y1, sphere_moving_z1, r)    
 
-    fprintf("Moving Golf Ball Intersection:\n");
-    Azimuth = 0;
-    for position = 1:length(sphere_moving_x)
-        for Vertical_Angle = -15:2:15
-            P_Start = [Radius_Start*sind(Azimuth) + LiDAR_x, ...
-                    Radius_Start*cosd(Azimuth) + LiDAR_y, ...
-                    LiDAR_z];
+sphere_moving_position2 = readmatrix('LiDAR_Precise.xlsx');
+sphere_moving_x2 = sphere_moving_position2(:,1);
+sphere_moving_y2 = sphere_moving_position2(:,3);
+sphere_moving_z2 = sphere_moving_position2(:,2);
 
-            P_End = [Radius_End*sind(Azimuth)*cosd(Vertical_Angle) + LiDAR_x, ...
-                    Radius_End*cosd(Azimuth)*cosd(Vertical_Angle) + LiDAR_y, ...
-                    Radius_End*sind(Vertical_Angle) + LiDAR_z];
-                
-            xA = P_Start(1);
-            yA = P_Start(2);
-            zA = P_Start(3);
-            xB = P_End(1);
-            zB = P_End(3);
-            yB = P_End(2);
-
-            A = (xB-xA)^2+(yB-yA)^2+(zB-zA)^2;
-            B = 2*((xB-xA)*(xA-sphere_moving_x(position))+(yB-yA)*(yA-sphere_moving_y(position))+(zB-zA)*(zA-sphere_moving_z(position)));
-            C = (xA-sphere_moving_x(position))^2+(yA-sphere_moving_y(position))^2+(zA-sphere_moving_z(position))^2-r^2;
-
-            Delta = B^2 - 4*A*C;
-
-            if (Delta == 0)
-                s = -B/2*A;
-                p_F = [(xA + s*(xB-xA)),(yA + s*(yB-yA)),(zA + s*(zB-zA))]
-                plot3([P_Start(1) p_F(1)], [P_Start(2) p_F(2)], [P_Start(3) p_F(3)]);
-                fprintf("Point of Intersection = [%13.4f, %13.4f, %13.4f]  |  Azimuth = %10.4f  |  Vertical Angle = %3.0f\n", ...
-                    p_FL(1), p_FL(2), p_FL(3), Azimuth, Vertical_Angle);
-            elseif (Delta > 0)
-                syms d;
-                s = solve((xA + d*(xB-xA) - sphere_moving_x(position))^2+(yA + d*(yB-yA) - sphere_moving_y(position))^2+(zA + d*(zB-zA) - sphere_moving_z(position))^2==r^2, d);
-                s1 = s(1);
-                s2 = s(2);
-                p1 = [(xA + s1*(xB-xA)),(yA + s1*(yB-yA)),(zA + s1*(zB-zA))];
-                p2 = [(xA + s2*(xB-xA)),(yA + s2*(yB-yA)),(zA + s2*(zB-zA))];
-                if (norm(p1-P_Start) < norm(p2-P_Start))
-                    p_FL = p1;
-                else
-                    p_FL = p2;
-                end
-                if (-p_FL(1) < P_Start(1)) & (-p_FL(1) > P_End(1)) ...
-                        | (-p_FL(2) < P_Start(2)) & (-p_FL(2) > P_End(2)) ...
-                        | (-p_FL(3) < P_Start(3)) & (-p_FL(3) > P_End(3))
-                    continue
-                elseif (p_FL(1) < -P_Start(1)) & (p_FL(1) > -P_End(1)) ...
-                        | (p_FL(2) < -P_Start(2)) & (p_FL(2) > -P_End(2)) ...
-                        | (p_FL(3) < -P_Start(3)) & (p_FL(3) > -P_End(3))
-                    continue
-                end   
-
-                [x y z] = sphere;
-                x = x * r;
-                y = y * r;
-                z = z * r;
-                surf(x + sphere_moving_x(position), y + sphere_moving_y(position), z + sphere_moving_z(position));
-
-                plot3([P_Start(1) p_FL(1)], [P_Start(2) p_FL(2)], [P_Start(3) p_FL(3)]);
-                plot3([P_Start(1) P_End(1)], [P_Start(2) P_End(2)], [P_Start(3) P_End(3)], 'Color', 'Black');
-                fprintf("Point of Intersection = [%13.4f, %13.4f, %13.4f]  |  Azimuth = %10.4f  |  Vertical Angle = %3.0f\n", ...
-                    p_FL(1), p_FL(2), p_FL(3), Azimuth, Vertical_Angle);
-                
-%                 if (-SPOI(1) < P_Start(1)) & (-SPOI(1) > P_End(1)) ...
-%                         | (-SPOI(2) < P_Start(2)) & (-SPOI(2) > P_End(2)) ...
-%                         | (-SPOI(3) < P_Start(3)) & (-SPOI(3) > P_End(3))
-%                     continue
-%                 end
-%                 if (SPOI(1) < -P_Start(1)) & (SPOI(1) > -P_End(1)) ...
-%                         | (SPOI(2) < -P_Start(2)) & (SPOI(2) > -P_End(2)) ...
-%                         | (SPOI(3) < -P_Start(3)) & (SPOI(3) > -P_End(3))
-%                     continue
-%                 end        
-            end
-        end
-        Azimuth = Azimuth + Azimuth_Resolution;
-    end
-    title('LiDAR')
-    xlabel('X')
-    ylabel('Y')
-    zlabel('Z')
-    daspect([1 1 1])
-    fprintf("\n");
-end
-
-function Triangle_Intersection(P1, P2, P3, Azimuth_Resolution, Radius_Start, Radius_End)
-    fprintf("Triangle Intersection:\n");
-    normal1 = cross(P2 - P1, P3 - P1);
-    fill3([P1(1) P2(1) P3(1)], ...
-            [P1(2) P2(2) P3(2)], ...
-            [P1(3) P2(3) P3(3)],'b');
-
-    for Azimuth = 0:Azimuth_Resolution:359
-       for Vertical_Angle = -15:2:15
-            P_Start = [Radius_Start*sind(Azimuth) + LiDAR_x, ...
-                    Radius_Start*cosd(Azimuth) + LiDAR_y, ...
-                    LiDAR_z];
-
-            P_End = [Radius_End*sind(Azimuth)*cosd(Vertical_Angle) + LiDAR_x, ...
-                    Radius_End*cosd(Azimuth)*cosd(Vertical_Angle) + LiDAR_y, ...
-                    Radius_End*sind(Vertical_Angle) + LiDAR_z];
-
-            Point_of_Intersection1 = P_Start + dot(P1 - P_Start, normal1) / dot(P_End - P_Start, normal1) * (P_End - P_Start);
-
-            if (-Point_of_Intersection1(1) < P_Start(1)) & (-Point_of_Intersection1(1) > P_End(1)) ...
-                | (-Point_of_Intersection1(2) < P_Start(2)) & (-Point_of_Intersection1(2) > P_End(2)) ...
-                | (-Point_of_Intersection1(3) < P_Start(3)) & (-Point_of_Intersection1(3) > P_End(3))
-                continue
-            end
 
             if ((dot(cross(P2 - P1, Point_of_Intersection1 - P1),normal1) >= 0 ...
                 && dot(cross(P3-P2, Point_of_Intersection1 - P2), normal1) >= 0) ...
@@ -370,12 +278,10 @@ function Laser_Emission_Pattern(FOV_Start, FOV_End, Lower_Angle, Upper_Angle, Az
                     Radius_End*cosd(Azimuth)*cosd(Vertical_Angle) + LiDAR_y, ...
                     Radius_End*sind(Vertical_Angle) + LiDAR_z];
 
-            plot3([P_Start(1) P_End(1)], [P_Start(2) P_End(2)], [P_Start(3) P_End(3)], 'LineWidth', 2.0);
-        end
-    end
-    title('LiDAR')
-    xlabel('X')
-    ylabel('Y')
-    zlabel('Z')
-    daspect([1 1 1])
-end
+hold off
+figure
+hold on
+
+
+Azimuth = 0;
+Moving_Golf_Ball_Intersection(Azimuth, sphere_moving_x2, sphere_moving_y2, sphere_moving_z2, r, Azimuth_Resolution, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
