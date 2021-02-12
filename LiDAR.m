@@ -19,6 +19,7 @@ Azimuth_Resolution = RPM / 60 * 360 * 55.296*10^-6;
 Radius_Start = 0.04191;
 Radius_End = 0.04267 * sind((180-Azimuth_Resolution) / 2) / sind(Azimuth_Resolution);
     
+
 % -------------------------------------------------------------------------
 
 % Change triangles' vertices; use values as arguments for additional
@@ -31,6 +32,7 @@ Radius_End = 0.04267 * sind((180-Azimuth_Resolution) / 2) / sind(Azimuth_Resolut
 % Triangle_Intersection(P1, P2, P3, Azimuth_Resolution, Radius_Start, Radius_End)
 
 % -------------------------------------------------------------------------
+ 
 
 % Shift sphere's center:
 % sphere_shift_x = 2;
