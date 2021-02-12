@@ -21,7 +21,11 @@ diameter = 0.042672 #m
 Area = (math.pi*diameter**2)/4 #m^2
 Cd = 0.2
 Cl = 0.2
-dt = 0.05
+dt = 2.304e-6
+
+# 0.05 for just general trajectory viewing purposes
+# 55.296e-6 for when all 16 lasers are shot at once
+# 2.304e-6 for when the simulation needs to be precise
 
 #creating the arraylist for each axis and it is outside the modules because it will be used in each module
 x_array = []
@@ -229,7 +233,7 @@ def both(v0, theta, wx, wy, wz, phi):
     ax.set_zlabel('y')
     plot.show()
     '''
-    workbook = xlsxwriter.Workbook('LiDAR.xlsx')
+    workbook = xlsxwriter.Workbook('LiDAR2_Precise.xlsx')
     worksheet = workbook.add_worksheet()
 
     for x in range(len(x_array)):
