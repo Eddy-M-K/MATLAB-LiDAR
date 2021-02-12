@@ -49,7 +49,7 @@ function Moving_Golf_Ball_Intersection(Azimuth, sphere_moving_x, sphere_moving_y
         end
         Azimuth = Azimuth + Azimuth_Resolution;
     end
-    title('LiDAR')
+    title('Moving Golf Ball Intersection')
     xlabel('X')
     ylabel('Y')
     zlabel('Z')
