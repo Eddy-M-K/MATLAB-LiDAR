@@ -14,16 +14,16 @@ format long
     
     % LiDAR Sensor Location Shift
 
-    LiDAR_x = 2;
-    LiDAR_y = -0.5;
-    LiDAR_z = 0.5;
+    LiDAR_x = 0.1;
+    LiDAR_y = 0.5;
+    LiDAR_z = 0.1;
 
 
     Azimuth_Resolution = RPM / 60 * 360 * 55.296*10^-6;
     Radius_Start = 0.04191;
 
-%     Radius_End = 0.04267 * sind((180-Azimuth_Resolution) / 2) / sind(Azimuth_Resolution);
-    Radius_End = 3;
+    Radius_End = 0.04267 * sind((180-Azimuth_Resolution) / 2) / sind(Azimuth_Resolution);
+%     Radius_End = 3;
 
 
 
@@ -44,9 +44,9 @@ format long
 % -------------------------------------------------------------------------
 
     % Shift sphere's center:
-    sphere_shift_x = 0.25;
-    sphere_shift_y = -0.1;
-    sphere_shift_z = 0.1;
+    sphere_shift_x = -0.75;
+    sphere_shift_y = -0.5;
+    sphere_shift_z = 0.2;
 
     % Function Calls
 %     Golf_Ball_Intersection(sphere_shift_x, sphere_shift_y, sphere_shift_z, r, Azimuth_Resolution, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
@@ -82,7 +82,7 @@ format long
     figure
     hold on
 
-%     Moving_Golf_Ball_Intersection(sphere_moving_x2, sphere_moving_y2, sphere_moving_z2, r, Azimuth_Resolution, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
+    Moving_Golf_Ball_Intersection(sphere_moving_x2, sphere_moving_y2, sphere_moving_z2, r, Azimuth_Resolution, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
 
 % -------------------------------------------------------------------------
 
@@ -262,10 +262,7 @@ function Golf_Ball_Intersection(sphere_shift_x, sphere_shift_y, sphere_shift_z, 
         xB = P_End(1);
         zB = P_End(3);
         yB = P_End(2);
-        sphere_shift_x = 0.50;
-        sphere_shift_y = -0.50;
-        sphere_shift_z = 0.1;
-        
+
         A = (xB-xA)^2+(yB-yA)^2+(zB-zA)^2;
         B = 2*((xB-xA)*(xA-sphere_shift_x)+(yB-yA)*(yA-sphere_shift_y)+(zB-zA)*(zA-sphere_shift_z));
         C = (xA-sphere_shift_x)^2+(yA-sphere_shift_y)^2+(zA-sphere_shift_z)^2-r^2;
