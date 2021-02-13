@@ -65,6 +65,6 @@ LiDAR_Emission_Pattern(FOV_Start, FOV_End, Lower_Angle, Upper_Angle, 10, Radius_
 hold off
 figure 
 hold on
-C = Precise_Moving_Golf_Ball_Intersection(Precise_Azimuth, sphere_moving_x4, sphere_moving_y4, sphere_moving_z4, r, Precise_Azimuth_Resolution, Radius_Start, 10, LiDAR_x, LiDAR_y, LiDAR_z)
+C = Precise_Moving_Golf_Ball_Intersection(Precise_Azimuth, sphere_moving_x4, sphere_moving_y4, sphere_moving_z4, r, Precise_Azimuth_Resolution, Radius_Start, 10, LiDAR_x, LiDAR_y, LiDAR_z);
 filename = 'Exported Points of Intersections (MATLAB LiDAR Simulation).xlsx';
 writecell(C, filename);
