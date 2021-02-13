@@ -20,8 +20,8 @@ function Static_Golf_Ball_Intersection(sphere_shift_x, sphere_shift_y, sphere_sh
 
             if (Delta == 0)
                 s = -B/2*A;
-                p_F = [P_Start(1) + s*slope(1), P_Start(2) + s*slope(2), P_Start(3) + s*slope(3)]
-                plot3([P_Start(1) p_F(1)], [P_Start(2) p_F(2)], [P_Start(3) p_F(3)]);
+                p_FL = [P_Start(1) + s*slope(1), P_Start(2) + s*slope(2), P_Start(3) + s*slope(3)];
+                plot3([P_Start(1) p_FL(1)], [P_Start(2) p_FL(2)], [P_Start(3) p_FL(3)]);
                 fprintf("Point of Intersection = [%13.4f, %13.4f, %13.4f]  |  Azimuth = %10.4f  |  Vertical Angle = %3.0f\n", ...
                     P_FL(1), P_FL(2), P_FL(3), Azimuth, Vertical_Angle);
             elseif (Delta > 0)
