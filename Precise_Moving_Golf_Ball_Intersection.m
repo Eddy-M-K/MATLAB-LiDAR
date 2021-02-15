@@ -2,7 +2,7 @@ function Precise_Moving_Golf_Ball_Intersection(Precise_Azimuth, sphere_moving_x,
     fprintf("Precise Moving Golf Ball Intersection:\n");
     position = 1;
     while position <= length(sphere_moving_x)
-        for Vertical_Angle = 15:2:-15
+        for Vertical_Angle = 15:-2:-15
             P_Start = [Radius_Start*sind(Precise_Azimuth) + LiDAR_x, ...
                     Radius_Start*cosd(Precise_Azimuth) + LiDAR_y, ...
                     LiDAR_z];
