@@ -43,11 +43,11 @@ function Static_Golf_Ball_Intersection(sphere_shift_x, sphere_shift_y, sphere_sh
                     P_FL = P2;
                 end
 
-                Plot_Print(P_Start, P_FL, Azimuth, Vertical_Angle, sphere_shift_x, sphere_shift_y, sphere_shift_z)
+                Plot_Print_H(P_Start, P_FL, Azimuth, Vertical_Angle, sphere_shift_x, sphere_shift_y, sphere_shift_z)
             end 
         end
     end 
-    Sphere(sphere_shift_x, sphere_shift_y, sphere_shift_z, r)
+    Sphere_H(sphere_shift_x, sphere_shift_y, sphere_shift_z, r)
     title('Static Golf Ball Intersection')
     xlabel('X')
     ylabel('Y')
