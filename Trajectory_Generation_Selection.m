@@ -1,6 +1,6 @@
 function [sphere_moving_x, sphere_moving_y, sphere_moving_z] = Trajectory_Generation_Selection(dt)
     Selection = input("Lift, Drag, Both, or just Gravity: ", 's');
-    if strcmpi(Selection, 'Drag-H')
+    if strcmpi(Selection, 'Drag')
         v0 = input("Inital velocity in m/s: ");
         theta = input("Angle of the velocity in degrees: ");
 
