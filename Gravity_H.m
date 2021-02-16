@@ -16,7 +16,7 @@ function [sphere_moving_x, sphere_moving_y, sphere_moving_z] = Gravity_H(v0, the
     z = 0;
 
     vx = v0*cos(theta);
-    vz = -grav*dt;
+    vz = vz - grav*dt;
 
     x = x + vx*dt;
     z = z + vz*dt;
