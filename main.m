@@ -1,3 +1,8 @@
+% IMPORTANT: This is a template main.m file which calls other functions
+% that don't have the -H tag (files with -H tags are helper functions).
+% Create a copy of this file for your local system but don't add, commit,
+% or push the duplicated main.m file to Github.
+
 clc
 close all
 clearvars
