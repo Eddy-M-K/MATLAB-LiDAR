@@ -1,4 +1,5 @@
-function Precise_Moving_Golf_Ball_Intersection(Precise_Azimuth, sphere_moving_x, sphere_moving_y, sphere_moving_z, r, Precise_Azimuth_Resolution, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
+function [Export] = Precise_Moving_Golf_Ball_Intersection(Precise_Azimuth, sphere_moving_x, sphere_moving_y, sphere_moving_z, r, Precise_Azimuth_Resolution, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
+    Export = {'Point of Intersection (x)', 'Point of Intersection (y)', 'Point of Intersection (z)', 'Azimuth', 'Vertical Angle', 'Sphere Center (x)', 'Sphere Center (y)', 'Sphere Center (z)'};
     fprintf("Precise Moving Golf Ball Intersection:\n");
     position = 1;
     while position <= length(sphere_moving_x)
@@ -21,8 +22,8 @@ function Precise_Moving_Golf_Ball_Intersection(Precise_Azimuth, sphere_moving_x,
 
             if (Delta == 0)
                 s = -B/2*A;
-                p_F = [P_Start(1) + s*slope(1), P_Start(2) + s*slope(2), P_Start(3) + s*slope(3)]
-                plot3([P_Start(1) p_F(1)], [P_Start(2) p_F(2)], [P_Start(3) p_F(3)]);
+                p_FL = [P_Start(1) + s*slope(1), P_Start(2) + s*slope(2), P_Start(3) + s*slope(3)];
+                plot3([P_Start(1) p_FL(1)], [P_Start(2) p_FL(2)], [P_Start(3) p_FL(3)]);
                 fprintf("Point of Intersection = [%13.4f, %13.4f, %13.4f]  |  Azimuth = %10.4f  |  Vertical Angle = %3.0f\n", ...
                     P_FL(1), P_FL(2), P_FL(3), Precise_Azimuth, Vertical_Angle);
             elseif (Delta > 0)
@@ -46,6 +47,8 @@ function Precise_Moving_Golf_Ball_Intersection(Precise_Azimuth, sphere_moving_x,
                 
                 Plot_Print(P_Start, P_FL, Precise_Azimuth, Vertical_Angle, sphere_moving_x(position), sphere_moving_y(position), sphere_moving_z(position))
                 Sphere(sphere_moving_x(position), sphere_moving_y(position), sphere_moving_z(position), r) 
+                Data = {double(P_FL(1)), double(P_FL(2)), double(P_FL(3)), Precise_Azimuth, Vertical_Angle, sphere_moving_x(position), sphere_moving_y(position), sphere_moving_z(position)};
+                Export = [Export; Data];
             end
             Precise_Azimuth = Precise_Azimuth + Precise_Azimuth_Resolution;
             position = position + 1;
