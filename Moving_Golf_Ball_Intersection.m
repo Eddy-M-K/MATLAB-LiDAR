@@ -43,8 +43,8 @@ function Moving_Golf_Ball_Intersection(Azimuth, sphere_moving_x, sphere_moving_y
                     P_FL = P2;
                 end
                 
-                Plot_Print(P_Start, P_FL, Azimuth, Vertical_Angle, sphere_moving_x(position), sphere_moving_y(position), sphere_moving_z(position))
-                Sphere(sphere_moving_x(position), sphere_moving_y(position), sphere_moving_z(position), r)    
+                Plot_Print_H(P_Start, P_FL, Azimuth, Vertical_Angle, sphere_moving_x(position), sphere_moving_y(position), sphere_moving_z(position))
+                Sphere_H(sphere_moving_x(position), sphere_moving_y(position), sphere_moving_z(position), r)    
             end
         end
         Azimuth = Azimuth + Azimuth_Resolution;

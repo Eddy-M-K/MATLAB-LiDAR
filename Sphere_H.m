@@ -1,4 +1,4 @@
-function Sphere(X, Y, Z, r)
+function Sphere_H(X, Y, Z, r)
     [i j k] = sphere;
     i = i * r;
     j = j * r;

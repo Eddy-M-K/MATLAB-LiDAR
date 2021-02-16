@@ -45,8 +45,8 @@ function [Export] = Precise_Moving_Golf_Ball_Intersection(Precise_Azimuth, spher
                     P_FL = P2;
                 end
                 
-                Plot_Print(P_Start, P_FL, Precise_Azimuth, Vertical_Angle, sphere_moving_x(position), sphere_moving_y(position), sphere_moving_z(position))
-                Sphere(sphere_moving_x(position), sphere_moving_y(position), sphere_moving_z(position), r) 
+                Plot_Print_H(P_Start, P_FL, Precise_Azimuth, Vertical_Angle, sphere_moving_x(position), sphere_moving_y(position), sphere_moving_z(position))
+                Sphere_H(sphere_moving_x(position), sphere_moving_y(position), sphere_moving_z(position), r) 
                 Data = {double(P_FL(1)), double(P_FL(2)), double(P_FL(3)), Precise_Azimuth, Vertical_Angle, sphere_moving_x(position), sphere_moving_y(position), sphere_moving_z(position)};
                 Export = [Export; Data];
             end
