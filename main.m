@@ -1,5 +1,5 @@
 % IMPORTANT: This is a template main.m file which calls other functions
-% that don't have the _H tag (files with -H tags are helper functions).
+% that don't have the _H tag (files with _H tags are helper functions).
 % Create a copy of this file for your local system but don't add, commit,
 % or push the duplicated main.m file to Github.
 
