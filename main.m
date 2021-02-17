@@ -86,6 +86,8 @@ Lower_Angle = -15;
 Upper_Angle = 15;
 Azimuth_Resolution = 30;
 
+% LiDAR positions in order:
+
 LiDAR_x1 = 7;
 LiDAR_y1 = -1;
 LiDAR_z1 = 1;
