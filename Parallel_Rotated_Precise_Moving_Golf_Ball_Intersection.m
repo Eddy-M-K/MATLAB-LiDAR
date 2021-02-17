@@ -1,5 +1,4 @@
-function [Export] = Parallel_Rotated_Precise_Moving_Golf_Ball_Intersection(Precise_Azimuth, sphere_moving_x, sphere_moving_y, sphere_moving_z, r, Precise_Azimuth_Resolution, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
-    Export = {'Point of Intersection (x)', 'Point of Intersection (y)', 'Point of Intersection (z)', 'Azimuth', 'Vertical Angle', 'Sphere Center (x)', 'Sphere Center (y)', 'Sphere Center (z)'};
+function [Export] = Parallel_Rotated_Precise_Moving_Golf_Ball_Intersection(Precise_Azimuth, sphere_moving_x, sphere_moving_y, sphere_moving_z, r, Precise_Azimuth_Resolution, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z, Export)
     fprintf("Rotated Precise Moving Golf Ball Intersection (Parallel to Golf Ball Flight):\n");
     position = 1;
     while position <= length(sphere_moving_x)

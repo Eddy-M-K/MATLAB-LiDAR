@@ -1,4 +1,4 @@
-function Triangle_Intersection(P1, P2, P3, Azimuth_Resolution, Radius_Start, Radius_End)
+function Triangle_Intersection(P1, P2, P3, Azimuth_Resolution, Radius_Start, Radius_End, LiDAR_x, LiDAR_y, LiDAR_z)
     fprintf("Triangle Intersection:\n");
     normal1 = cross(P2 - P1, P3 - P1);
     fill3([P1(1) P2(1) P3(1)], ...
