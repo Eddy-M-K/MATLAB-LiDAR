@@ -1,7 +1,8 @@
 % IMPORTANT: This is a template main.m file which calls other functions
 % that don't have the _H tag (files with _H tags are helper functions).
-% Create a copy of this file for your local system but don't add, commit,
-% or push the duplicated main.m file to Github.
+% Create a copy of this file called "Copy_of_main" for your local system 
+% if you plan to commit changes to the repository. 
+
 % All values are in meters.
 
 clc
@@ -12,6 +13,13 @@ format long
 % Variables that should remain constant for accuracy:
 Radius_Start = 0.04191; % Starting length of laser beam
 r = 0.021335;           % Golf ball radius
+
+% IMPORTANT: If changing to a different ball, ensure you change the mass 
+% and diameter values within Both_H.m or the relevant trajectory generation 
+% function you will be calling:
+
+% Baseball radius 0.0375;
+% Tennis Ball radius 0.03429;
 
 % RPM must be in increments of 60 from 300 to 1200
 RPM = 1200; 

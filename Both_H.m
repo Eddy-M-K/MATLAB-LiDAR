@@ -1,8 +1,8 @@
 function [sphere_moving_x, sphere_moving_y, sphere_moving_z] = Both_H(v0, theta, wx, wy, wz, phi, dt)
     rho = 1.225; 
     grav =9.81; 
-    mass = 0.042672; 
-    diameter = 0.042672;
+    mass = 0.042672; % Baseball 0.145; % Tennis Ball 0.0577; 
+    diameter = 0.042672; % Baseball 0.075; % Tennis Ball 0.06858; 
     Area = pi*diameter^2/4;
     Cd = 0.2;
     Cl = 0.2;
@@ -27,7 +27,7 @@ function [sphere_moving_x, sphere_moving_y, sphere_moving_z] = Both_H(v0, theta,
     
     x = 0;
     y = 0;
-    z = 0;
+    z = 1;
     
     speed = sqrt(vx^2 + vy^2 + vz^2);
     Q = rho*speed^2*Area/2;
@@ -54,7 +54,7 @@ function [sphere_moving_x, sphere_moving_y, sphere_moving_z] = Both_H(v0, theta,
         y = y + vy*dt;
         z = z + vz*dt;
               
-        if z < 0
+        if z < 1
             break
         end
         
